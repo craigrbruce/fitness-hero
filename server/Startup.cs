@@ -41,7 +41,7 @@ namespace Server
             // https://docs.efproject.net/en/latest/platforms/aspnetcore/new-db.html
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddIdentity<User, IdentityRole>()
