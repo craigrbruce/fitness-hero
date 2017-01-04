@@ -1,0 +1,6 @@
+# Ignore everything
+*
+
+# Except Dockerrun.aws.json
+!Dockerrun.aws.json
+!.ebextensions/*

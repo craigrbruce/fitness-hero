@@ -1,0 +1,17 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "gitlab-registry-fitness-hero",
+    "Key": "dockercfg"
+  },
+  "Image": {
+    "Name": "registry.gitlab.com/craigrbruce/fitness-hero:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "5000"
+    }
+  ],
+  "Logging": "/usr/src/app/logs"
+}
