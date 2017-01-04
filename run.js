@@ -102,49 +102,6 @@ tasks.set('build', () => {
     }));
 });
 
-
-//
-// Build and publish web application to Azure Web Apps
-// -----------------------------------------------------------------------------
-tasks.set('publish', () => {
-  global.DEBUG = process.argv.includes('--debug') || false;
-  const remote = {
-    name: 'azure',
-    url: 'https://<user>@<app>.scm.azurewebsites.net:443/<app>.git', // TODO: Update deployment URL
-  };
-  const opts = { cwd: path.resolve(__dirname, './build'), stdio: ['ignore', 'inherit', 'inherit'] };
-  const git = (...args) => new Promise((resolve, reject) => {
-    cp.spawn('git', args, opts).on('close', code => {
-      if (code === 0) {
-        resolve();
-      } else {
-        reject(new Error(`git ${args.join(' ')} => ${code} (error)`));
-      }
-    });
-  });
-
-  return Promise.resolve()
-    .then(() => run('clean'))
-    .then(() => git('init', '--quiet'))
-    .then(() => git('config', '--get', `remote.${remote.name}.url`)
-      .then(() => git('remote', 'set-url', remote.name, remote.url))
-      .catch(() => git('remote', 'add', remote.name, remote.url))
-    )
-    .then(() => git('ls-remote', '--exit-code', remote.url, 'master')
-      .then(() => Promise.resolve()
-        .then(() => git('fetch', remote.name))
-        .then(() => git('reset', `${remote.name}/master`, '--hard'))
-        .then(() => git('clean', '--force'))
-      )
-      .catch(() => Promise.resolve())
-    )
-    .then(() => run('build'))
-    .then(() => git('add', '.', '--all'))
-    .then(() => git('commit', '--message', new Date().toUTCString())
-      .catch(() => Promise.resolve()))
-    .then(() => git('push', remote.name, 'master', '--force', '--set-upstream'));
-});
-
 //
 // Build website and launch it in a browser for testing in watch mode
 // -----------------------------------------------------------------------------
