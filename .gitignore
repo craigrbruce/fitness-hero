@@ -12,6 +12,7 @@ node_modules
 npm-debug.log
 
 # .NET, Visual Studio
+.vscode/
 .vs/
 project.lock.json
 *.[Cc]ache
