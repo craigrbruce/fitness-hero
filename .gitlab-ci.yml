@@ -10,7 +10,7 @@ stages:
   - deploy
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.gitlab.com/craigrbruce/fitness-hero:$CI_BUILD_REF
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/craigrbruce/fitness-hero:$CI_BUILD_REF_NAME
   CONTAINER_RELEASE_IMAGE: registry.gitlab.com/craigrbruce/fitness-hero:latest
 
 build:
@@ -32,15 +32,10 @@ build:
     - nvm use node
     - npm install
     - npm run build
+    - npm run test
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
-
-test:
-  stage: test
-  script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - docker run $CONTAINER_TEST_IMAGE npm test
 
 release-image:
   stage: release
