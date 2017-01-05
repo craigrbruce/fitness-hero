@@ -1,0 +1,61 @@
+image: docker:git
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+  - release
+  - deploy
+
+variables:
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/craigrbruce/fitness-hero:$CI_BUILD_REF
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/craigrbruce/fitness-hero:latest
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+
+build:
+  image: microsoft/dotnet
+  stage: build
+  script:
+    - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+    - npm install
+    - npm run build
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+test:
+  stage: test
+  script:
+    - docker run $CONTAINER_TEST_IMAGE npm test
+
+release-image:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - master
+
+deploy-dev:
+  stage: deploy
+  environment: development
+  script:
+    - echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" > /etc/apk/repositories
+    - echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+    - echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+    - apk add --no-cache ca-certificates python2 python2-dev py-setuptools
+    - if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python2.7 /usr/bin/python; fi
+    - if [[ ! -e /usr/bin/python-config ]]; then ln -sf /usr/bin/python2.7-config /usr/bin/python-config; fi
+    - if [[ ! -e /usr/bin/easy_install ]];  then ln -sf /usr/bin/easy_install-2.7 /usr/bin/easy_install; fi
+    - easy_install pip
+    - pip install --upgrade pip
+    - if [[ ! -e /usr/bin/pip ]]; then ln -sf /usr/bin/pip2.7 /usr/bin/pip; fi
+    - pip install awsebcli
+    - eb init --region "ap-southeast-2" --platform "Docker 1.11.2" fitness-hero
+    - eb deploy fitness-hero-dev
+  only:
+    - master
