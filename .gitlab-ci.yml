@@ -18,8 +18,7 @@ build:
   stage: build
   script:
     - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
-    - export NVM_DIR="/root/.nvm"
-    - \. "$NVM_DIR/nvm.sh"
+    - source ~/.bashrc
     - npm install
     - npm run build
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
