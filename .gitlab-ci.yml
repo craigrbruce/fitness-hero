@@ -24,6 +24,8 @@ build:
     - nvm use node
     - npm install
     - npm run build
+    - apt-get update
+    - apt-get -y install docker.io
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
