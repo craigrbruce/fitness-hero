@@ -19,6 +19,8 @@ build:
   script:
     - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
     - source ~/.bashrc
+    - nvm install node
+    - nvm use node
     - npm install
     - npm run build
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
