@@ -25,6 +25,7 @@ namespace Server
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile($"appsettings.json", optional: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables()
                 .Build();
         }
 
