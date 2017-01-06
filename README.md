@@ -35,13 +35,6 @@
 ```
 
 
-### Prerequisites
-
-* OS X, Windows or Linux
-* [Node.js](https://nodejs.org) v6 or newer
-* [.NET Core](https://www.microsoft.com/net/core) and [.NET Core SDK](https://www.microsoft.com/net/core)
-* [Visual Studio Code](https://code.visualstudio.com/) with [C# extension](https://github.com/OmniSharp/omnisharp-vscode) (or Visual Studio 2015 or newer)
-
 
 ### Getting Started
 
@@ -73,24 +66,26 @@ You can also run your app in a release (production) mode by running `node run --
 Hot Module Replacement (HMR) by running `node run --no-hmr`.
 
 
-### How to Deploy
+### Set up Postgres DB
 
-Before you can deploy your app to [Azure App Service](https://azure.microsoft.com/services/app-service/),
-you need to open Web App settings in [Azure Portal](https://portal.azure.com/), go to "Deployment
-Source", select "Local Git Repository" and hit [OK]. Then copy and paste "Git clone URL" of your
-Web App into [`run.js/publish`](run.js) file. Finally, whenever you need to compile your
-app into a distributable format and upload that to Windows Azure App Service, simply run:
-
+#### Run Postgres in Docker container
+Note environment variables are the same for the Knexfile development configuration.
 ```shell
-$ node run publish              # Same as running: npm run publish
+docker run --name postgres-db -e POSTGRES_USER=dbuser -e POSTGRES_PASSWORD=password -e POSTGRES_DB=ebdb -p5432:5432 -d postgres:latest
 ```
 
+Once the above container is running, you can use psql to interact with the database using the following.
+```shell
+docker run -it --rm --link postgres-db:postgres postgres psql -h postgres -U dbuser ebdb
+```
 
-### Related Projects
-
-* [React App SDK](https://github.com/kriasoft/react-app) — build React applications with a single dev dependency and no build configuration
-* [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, Express, GraphQL, React)
-* [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — JavaScript library boilerplate (ES2015+, Babel, Rollup)
-* [ASP.NET Core Starter Kit `|>` F#](https://github.com/kriasoft/fsharp-starter-kit) — Web app boilerplate (F#, .NET Core, Kestrel, GraphQL, React)
-* [Universal Router](https://github.com/kriasoft/universal-router) — Isomorphic router for web and single-page applications (SPA)
-* [Membership Database](https://github.com/membership/membership.db) — SQL database boilerplate for web app users, roles and auth tokens
+#### Run Postgres.app
+If you can't use Docker and you have a Mac, then install Postgres.app and run the following.
+```shell
+"/Applications/Postgres.app/Contents/Versions/9.6/bin/psql" -p5432 -d "postgres"
+CREATE USER dbuser WITH CREATEDB PASSWORD 'password';
+\q
+"/Applications/Postgres.app/Contents/Versions/9.6/bin/psql" -p5432 -d "postgres" --username=dbuser --password
+CREATE DATABASE ebdb WITH ENCODING='UTF8' OWNER=dbuser;
+\q
+```
