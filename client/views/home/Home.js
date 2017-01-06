@@ -10,8 +10,7 @@
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 
-const title = 'ASP.NET Core Starter Kit';
-const link = 'https://github.com/kriasoft/aspnet-starter-kit';
+const title = 'Fitness Hero';
 
 class Home extends React.Component {
 
@@ -27,9 +26,6 @@ class Home extends React.Component {
     return (
       <Layout>
         <h1 className="mdl-typography--title">Welcome to {title}!</h1>
-        <p className="mdl-typography--body-1">
-          For more information visit <a href={link}>{link}</a>
-        </p>
         <h4 className="mdl-typography--title">Articles</h4>
         <ul>
           {this.props.articles.map((article, i) =>
