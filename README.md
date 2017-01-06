@@ -89,3 +89,11 @@ CREATE USER dbuser WITH CREATEDB PASSWORD 'password';
 CREATE DATABASE ebdb WITH ENCODING='UTF8' OWNER=dbuser;
 \q
 ```
+
+
+## AWS Beanstalk
+
+### To view environment variables in an EC2 instance
+```bash
+eb ssh
+sudo /opt/elasticbeanstalk/bin/get-config environment --output YAML
