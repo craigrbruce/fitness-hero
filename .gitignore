@@ -14,6 +14,7 @@ npm-debug.log
 # .NET, Visual Studio
 .vscode/
 .vs/
+.idea/
 project.lock.json
 *.[Cc]ache
 !*.[Cc]ache/
