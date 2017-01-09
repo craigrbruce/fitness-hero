@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Server.Models;
+using Server.Config;
 
 namespace Server
 {
@@ -44,11 +45,13 @@ namespace Server
       }
       else
       {
+        // Register Entity Framework database context
+        // https://docs.efproject.net/en/latest/platforms/aspnetcore/new-db.html
         services.AddDbContext<DatabaseContext>(options =>
         {
-          options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
-        });
-
+            var databaseSettings = new DatabaseSettings(Configuration.GetSection("Database"));
+            options.UseNpgsql(databaseSettings.ConnectionString);
+        }); 
       }
 
       services.AddIdentity<User, IdentityRole>()
