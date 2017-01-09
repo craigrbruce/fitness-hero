@@ -6,11 +6,11 @@ namespace Server.Config
     {
         public DatabaseSettings(IConfigurationSection databaseConfigurationSection)
         {
-            this.Host = databaseConfigurationSection.GetValue<string>("RDS_HOSTNAME");
-            this.Port = databaseConfigurationSection.GetValue<string>("RDS_PORT");
-            this.Database = databaseConfigurationSection.GetValue<string>("RDS_DB_NAME");
-            this.Username = databaseConfigurationSection.GetValue<string>("RDS_USERNAME");
-            this.Password = databaseConfigurationSection.GetValue<string>("RDS_PASSWORD");
+            Host = databaseConfigurationSection.GetValue<string>("RDS_HOSTNAME");
+            Port = databaseConfigurationSection.GetValue<string>("RDS_PORT");
+            Database = databaseConfigurationSection.GetValue<string>("RDS_DB_NAME");
+            Username = databaseConfigurationSection.GetValue<string>("RDS_USERNAME");
+            Password = databaseConfigurationSection.GetValue<string>("RDS_PASSWORD");
         }
 
         public string Host { get; }
@@ -19,10 +19,7 @@ namespace Server.Config
         public string Username { get; }
         public string Password { get; }
 
-        public string ConnectionString {
-            get {
-                return "Host=" + Host + ";Port=" + Port + ";Database=" + Database + ";Username=" + Username + ";Password=" + Password;
-            }
-        }
+        public string ConnectionString => "Host=" + Host + ";Port=" + Port + ";Database=" + Database + ";Username=" + Username + ";Password=" + Password;
+        
     }
 }
