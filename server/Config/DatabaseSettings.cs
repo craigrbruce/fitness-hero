@@ -19,7 +19,7 @@ namespace Server.Config
         public string Username { get; }
         public string Password { get; }
 
-        public string ConnectionString => "Host=" + Host + ";Port=" + Port + ";Database=" + Database + ";Username=" + Username + ";Password=" + Password;
+        public string ConnectionString => $"Host={Host};Port={Port};Database={Database};Username={Username};Password={Password}";
         
     }
 }
