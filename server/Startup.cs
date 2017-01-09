@@ -49,10 +49,11 @@ namespace Server
           options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
         });
 
-        services.AddIdentity<User, IdentityRole>()
-            .AddEntityFrameworkStores<DatabaseContext>()
-            .AddDefaultTokenProviders();
       }
+
+      services.AddIdentity<User, IdentityRole>()
+          .AddEntityFrameworkStores<DatabaseContext>()
+          .AddDefaultTokenProviders();
 
       services.AddMvcCore()
           .AddAuthorization()
