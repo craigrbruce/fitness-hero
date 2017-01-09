@@ -6,11 +6,11 @@ namespace Server.Config
     {
         public DatabaseSettings(IConfigurationSection databaseConfigurationSection)
         {
-            Host = databaseConfigurationSection.GetValue<string>("RDS_HOSTNAME");
-            Port = databaseConfigurationSection.GetValue<string>("RDS_PORT");
-            Database = databaseConfigurationSection.GetValue<string>("RDS_DB_NAME");
-            Username = databaseConfigurationSection.GetValue<string>("RDS_USERNAME");
-            Password = databaseConfigurationSection.GetValue<string>("RDS_PASSWORD");
+            Host = databaseConfigurationSection["RDS_HOSTNAME"];
+            Port = databaseConfigurationSection["RDS_PORT"];
+            Database = databaseConfigurationSection["RDS_DB_NAME"];
+            Username = databaseConfigurationSection["RDS_USERNAME"];
+            Password = databaseConfigurationSection["RDS_PASSWORD"];
         }
 
         public string Host { get; }
