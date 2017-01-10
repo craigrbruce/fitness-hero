@@ -30,9 +30,6 @@ class Header extends React.Component {
         className="mdl-layout__header mdl-layout__header--transparent"
       >
         <div className={`mdl-layout__header-row ${s.headerRow}`}>
-          <Link className="mdl-layout-title" to="/">
-            <Logo height={48} />
-          </Link>
           <div className="mdl-layout-spacer" />
           <Navigation />
         </div>
