@@ -18,7 +18,7 @@ namespace FH.Test.Integration.Api.User
         {
             // TODO .. CallApi<object> should be CallApi<User>
             var response =
-                _fixture.CallApi<object>("http://localhost/api/v1/user", HttpMethod.Get).Result;
+                _fixture.CallApi<object>("http://localhost/api/v1/users", HttpMethod.Get).Result;
             response.Should().NotBeNull();
         }
     }
