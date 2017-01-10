@@ -1,60 +1,8 @@
-# Fitness Hero Project
+# Fitness Hero
 
-### Directory Layout
+## Where heroes get fit
 
-```shell
-.
-├── /.vscode/                   # Visual Studio Code settings
-├── /build/                     # The folder for compiled output
-├── /client/                    # Client-side app (frontend)
-│   ├── /components/            # Common or shared UI components
-│   ├── /utils/                 # Helper functions and utility classes
-│   ├── /views/                 # UI components for web pages (screens)
-│   ├── history.js              # HTML5 History API wrapper used for navigation
-│   ├── main.js                 # Entry point that bootstraps the app
-│   ├── router.js               # Lightweight application router
-│   ├── routes.json             # The list of application routes
-│   └── store.js                # Application state manager (Redux)
-├── /client.test/               # Unit and integration tests for the frontend app
-├── /docs/                      # Documentation to the project
-├── /public/                    # Static files such as favicon.ico etc.
-│   ├── robots.txt              # Instructions for search engine crawlers
-│   └── ...                     # etc.
-├── /server/                    # Web server and data API (backend)
-│   ├── /Controllers/           # ASP.NET Web API and MVC controllers
-│   ├── /Models/                # Entity Framework models (entities)
-│   ├── /Views/                 # Server-side rendered views
-│   ├── appsettings.json        # Server-side application settings
-│   ├── Startup.cs              # Server-side application entry point
-│   └── web.config              # Web server settings for IIS
-├── /server.test/               # Unit and integration tests for the backend app
-│── jsconfig.json               # Visual Studio Code settings for JavaScript
-│── package.json                # The list of project dependencies and NPM scripts
-│── run.js                      # Build automation script (similar to gulpfile.js)
-└── webpack.config.js           # Bundling and optimization settings for Webpack
-```
-
-
-
-### Getting Started
-
-**Step 1**. Clone the latest version of **ASP.NET Core Starter Kit** on your local machine by running:
-
-```shell
-$ git clone -o aspnet-starter-kit -b master --single-branch \
-      https://github.com/kriasoft/aspnet-starter-kit.git MyApp
-$ cd MyApp
-```
-
-
-**Step 2**. Install project dependencies listed in [`project.json`](server/project.json) and
-[`package.json`](package.json) files: 
-
-```shell
-$ npm install                   # Install both Node.js and .NET Core dependencies
-```
-
-**Step 3**. Finally, launch your web app:
+Launch the app:
 
 ```shell
 $ node run                      # Compile and lanch the app, same as running: npm start
