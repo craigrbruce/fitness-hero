@@ -1,12 +1,5 @@
 {
     "version": "1.0.0-*",
-
-    "buildOptions": {
-        "debugType": "portable",
-        "emitEntryPoint": true,
-        "preserveCompilationContext": true
-    },
-
     "dependencies": {
         "Microsoft.AspNetCore.Antiforgery": "1.1.0",
         "Microsoft.AspNetCore.Authentication.Facebook": "1.1.0",
@@ -30,7 +23,6 @@
         "Microsoft.NETCore.App": { "version": "1.1.0", "type": "platform" },
         "Newtonsoft.Json": "9.0.2-beta1"
     },
-
     "frameworks": {
         "netcoreapp1.1": {
             "dependencies": {
@@ -45,7 +37,11 @@
             ]
         }
     },
-
+    "buildOptions": {
+        "debugType": "portable",
+        "emitEntryPoint": true,
+        "preserveCompilationContext": true
+    },
     "tooling": {
         "defaultNamespace": "Server"
     },

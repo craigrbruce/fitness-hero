@@ -2,10 +2,6 @@
     "version": "1.0.0",
     "dependencies": {
         "server": "1.0.0-*",
-        "Microsoft.NETCore.App": {
-            "type": "platform",
-            "version": "1.0.0-*"
-        },
         "Microsoft.DotNet.InternalAbstractions": "1.0.0-*",
         "Microsoft.AspNetCore.TestHost": "1.0.0-*",
         "Microsoft.AspNet.Hosting": "1.0.0-*",
@@ -23,7 +19,6 @@
                 }
             },
             "imports": [
-                "dotnet5.6",
                 "dnxcore50",
                 "portable-net45+win8"
             ]
