@@ -1,13 +1,5 @@
-/**
- * ASP.NET Core Starter Kit (https://dotnetreact.com)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from 'react';
+import * as Mdl from 'react-mdl';
 import Header from './Header';
 import s from './Layout.css';
 
@@ -23,20 +15,18 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <div className="mdl-layout mdl-js-layout" ref={node => { this.root = node; }}>
-        <div className="mdl-layout__inner-container">
-          <div className={s.ribbon}>
-            <Header />
-            <div className={s.container}>
-              <h1 className={`mdl-typography--title ${s.tagline}`}>Fitness Hero</h1>
-              <p className={`mdl-typography--body-1 ${s.summary}`}>
-                Motivate and inspire others
-              </p>
-            </div>
-          </div>
+      <Mdl.Layout fixedDrawer fixedHeader>
+        <Header title="Fitness Hero" />
+        <Mdl.Drawer title="Welcome Bob User">
+          <Mdl.Navigation>
+            <a href="">Clients</a>
+            <a href="">Appointments</a>
+          </Mdl.Navigation>
+        </Mdl.Drawer>
+        <Mdl.Content >
           <main {...this.props} className={s.content} />
-        </div>
-      </div>
+        </Mdl.Content>
+      </Mdl.Layout>
     );
   }
 }
