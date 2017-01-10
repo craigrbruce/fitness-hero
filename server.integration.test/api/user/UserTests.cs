@@ -1,9 +1,6 @@
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using FluentAssertions;
 using Xunit;
-using Server.Models;
 
 namespace FH.Test.Integration.Api.User
 {
