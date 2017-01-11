@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
@@ -58,6 +59,13 @@ namespace Server.Controllers.Api.Clients
     {
       _repository.Delete(new[] { id });
       return NoContent();
+    }
+
+    [HttpDelete]
+    public IActionResult BulkDelete(int[] ids)
+    {
+      _repository.Delete(ids);
+      return new NoContentResult();
     }
   }
 }
