@@ -19,6 +19,6 @@ namespace Server
                 .Build();
 
             host.Run();
-    }
+        }
     }
 }
