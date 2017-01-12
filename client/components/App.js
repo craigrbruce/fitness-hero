@@ -1,9 +1,8 @@
 import React from 'react';
 import * as Mdl from 'react-mdl';
-import s from './Layout.css';
+import s from './App.css';
 
-class Layout extends React.Component {
-
+class App extends React.Component {
   componentDidMount() {
     window.componentHandler.upgradeElement(this.root);
   }
@@ -24,11 +23,15 @@ class Layout extends React.Component {
           </Mdl.Navigation>
         </Mdl.Drawer>
         <Mdl.Content >
-          <main {...this.props} className={s.content} />
+          {this.props.children}
         </Mdl.Content>
       </Mdl.Layout>
     );
   }
 }
 
-export default Layout;
+App.propTypes = {
+  children: React.PropTypes.element.isRequired,
+};
+
+export default App;

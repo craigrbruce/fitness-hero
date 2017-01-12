@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import Layout from '../../components/Layout';
 
 const title = 'Fitness Hero';
 
@@ -13,9 +12,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Layout>
-        This is the landing page. Terrific
-      </Layout>
+      <div>Some clients go here </div>
     );
   }
 }
