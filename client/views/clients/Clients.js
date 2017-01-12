@@ -14,7 +14,7 @@ class Home extends React.Component {
   render() {
     return (
       <Layout>
-        This is the landing page. Terrific
+        Here there be clients.
       </Layout>
     );
   }
