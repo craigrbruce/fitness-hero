@@ -65,7 +65,7 @@ namespace Server.Controllers.Api.Clients
     public IActionResult BulkDelete(int[] ids)
     {
       _repository.Delete(ids);
-      return new NoContentResult();
+      return NoContent();
     }
   }
 }

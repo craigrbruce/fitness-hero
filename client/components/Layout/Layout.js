@@ -1,9 +1,6 @@
 import React from 'react';
 import * as Mdl from 'react-mdl';
-import Header from './Header';
 import s from './Layout.css';
-import Navigation from './Navigation';
-import Link from '../Link';
 
 class Layout extends React.Component {
 
@@ -17,10 +14,14 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <Mdl.Layout fixedDrawer fixedHeader>
-        <Header title="Fitness Hero" />
-        <Mdl.Drawer title="Welcome Bob User">
-          <Navigation />
+      <Mdl.Layout fixedDrawer fixedHeader >
+        <Mdl.Header title="Fitness Hero" className={s.header} />
+        <Mdl.Drawer title="Welcome Bob User" className={s.drawer}>
+          <Mdl.Navigation className={s.navigation} >
+            <a href="/">Home</a>
+            <a href="/clients">Clients</a>
+            <a href="/appointments">Appointments</a>
+          </Mdl.Navigation>
         </Mdl.Drawer>
         <Mdl.Content >
           <main {...this.props} className={s.content} />
