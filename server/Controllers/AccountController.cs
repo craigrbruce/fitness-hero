@@ -29,6 +29,13 @@ namespace Server.Controllers
             };
         }
 
+        [AllowAnonymous]
+        [HttpGet("register")]
+        public IActionResult Register()
+        {                                    
+            return View();
+        }
+
         [HttpGet("login/{provider}")]
         [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
