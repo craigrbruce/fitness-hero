@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Server.Models;
@@ -15,12 +16,14 @@ namespace Server.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger _logger;
         private readonly SortedList<string, string> _providers;
 
-        public AccountController(SignInManager<User> signInManager, ILoggerFactory loggerFactory)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<User> signInManager, ILoggerFactory loggerFactory)
         {
+            _userManager = userManager;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _providers = new SortedList<string, string>
@@ -35,6 +38,13 @@ namespace Server.Controllers
         {                                    
             return View();
         }
+
+        [AllowAnonymous]
+        [HttpGet("login")]
+        public IActionResult Login()
+        {
+            return View();
+        } 
 
         [HttpGet("login/{provider}")]
         [AllowAnonymous]
