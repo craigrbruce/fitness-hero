@@ -4,7 +4,7 @@ import 'whatwg-fetch';
 import React from 'react';
 import { render } from 'react-dom';
 import FastClick from 'fastclick';
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 
@@ -13,7 +13,7 @@ import Root from './components/Root';
 
 const store = configureStore();
 const container = document.getElementById('container');
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 render(
   <AppContainer>
@@ -25,8 +25,9 @@ render(
 
 FastClick.attach(document.body);
 
+console.log('................................................', module.hot);
 if (module.hot) {
-  module.hot.accept('./components/Root', () => {
+  module.hot.accept('./components/Root.js', () => {
     // eslint-disable-next-line global-require, import/newline-after-import
     const NewRoot = require('./components/Root').default;
     render(
