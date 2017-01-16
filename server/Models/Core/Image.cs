@@ -1,9 +1,7 @@
-using System;
-
 namespace Server.Models.Core
 {
   public class Image : Model
   {
-    public Uri Uri { get; set; }
+    public string Uri { get; set; }
   }
 }
