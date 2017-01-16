@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Server.Models;
+using Server.Models.Core;
 using Server.Persistence;
 
 namespace Server.Controllers.Api.Clients

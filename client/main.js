@@ -25,7 +25,6 @@ render(
 
 FastClick.attach(document.body);
 
-console.log('................................................', module.hot);
 if (module.hot) {
   module.hot.accept('./components/Root.js', () => {
     // eslint-disable-next-line global-require, import/newline-after-import
@@ -33,7 +32,8 @@ if (module.hot) {
     render(
       <AppContainer>
         <NewRoot store={store} history={history} />
-      </AppContainer>
+      </AppContainer>,
+      container
     );
   });
 }
