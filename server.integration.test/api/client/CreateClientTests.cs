@@ -22,7 +22,7 @@ namespace FH.Test.Integration.Api.User
     [Fact]
     public void client_should_be_created()
     {
-      var client = new Client
+      var model = new Client
       {
         Gender = Gender.Male,
         GivenName = "Bob",
@@ -40,17 +40,17 @@ namespace FH.Test.Integration.Api.User
 
       var response =
           _fixture
-            .CallApi<CreatedResult, Client>(
+            .CallApi<Client, Client>(
                 "http://localhost/api/v1/clients",
                  HttpMethod.Post,
-                 client
+                 model
                  ).Result;
 
       response.Should().NotBeNull();
       response.HttpResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 
-      //var findClientResponse = _fixture.CallApi<Client>(response.HttpResponse.Headers.Location.ToString(), HttpMethod.Get).Result;
-      //   findClientResponse.Result.Id.Should().BePositive();
+      var location = response.HttpResponse.Headers.Location.ToString();
+      location.Should().Be("/api/v1/clients/1");
     }
   }
 }

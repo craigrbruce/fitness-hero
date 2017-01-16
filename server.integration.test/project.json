@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "dependencies": {
-        "server": "1.0.0-*",
+        "server": "1.0.0",
         "Microsoft.DotNet.InternalAbstractions": "1.0.0-*",
         "Microsoft.AspNetCore.TestHost": "1.0.0-*",
         "Microsoft.AspNet.Hosting": "1.0.0-*",

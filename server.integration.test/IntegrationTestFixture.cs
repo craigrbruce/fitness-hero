@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -39,24 +40,29 @@ namespace FH.Test.Integration
         where TResponse : class
         where TRequest : class
     {
-      using (var client = Server.CreateClient().AcceptJson())
+      using (var client = Server.CreateClient())
       {
+
         HttpResponseMessage response;
         if (httpMethod == HttpMethod.Post)
         {
-          response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(body)));
+          response = await client
+            .PostAsync(url, new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json"))
+            .ConfigureAwait(continueOnCapturedContext:false);
         }
         else if (httpMethod == HttpMethod.Put)
         {
-          response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(body)));
+          response = await client
+            .PutAsync(url, new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json"))
+            .ConfigureAwait(continueOnCapturedContext:false);
         }
         else if (httpMethod == HttpMethod.Delete)
         {
-          response = await client.DeleteAsync(url);
+          response = await client.DeleteAsync(url).ConfigureAwait(continueOnCapturedContext:false);
         }
         else
         {
-          response = await client.GetAsync(url);
+          response = await client.GetAsync(url).ConfigureAwait(continueOnCapturedContext:false);
         }
 
         var result = response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created ?

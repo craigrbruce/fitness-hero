@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Server.Models;
@@ -7,7 +8,23 @@ namespace Server.Persistence
 {
   public class DatabaseContext : IdentityDbContext<User>
   {
-    public DatabaseContext(DbContextOptions options) : base(options) { }
+    public DatabaseContext(DbContextOptions options, IHostingEnvironment env = null) : base(options)
+    {
+      if (env != null)
+      {
+        if (env.EnvironmentName == "Test")
+        {
+          Database.OpenConnection();
+          Database.EnsureCreated();
+        }
+        else if (env.IsDevelopment())
+        {
+          Database.SetCommandTimeout(300);
+          Database.Migrate();
+        }
+      }
+
+    }
 
     public DbSet<Client> Clients { get; set; }
 
