@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Server.Models;
+using Server.Models.Core;
 
 namespace Server.Persistence {
     public interface IRepository<T>

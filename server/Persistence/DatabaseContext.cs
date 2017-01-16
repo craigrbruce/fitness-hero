@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Server.Models;
+using Server.Models.Client;
 
 namespace Server.Persistence
 {

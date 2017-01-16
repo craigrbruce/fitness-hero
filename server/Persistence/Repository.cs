@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Server.Models;
+using Server.Models.Core;
 using Microsoft.Extensions.Options;
 
 namespace Server.Persistence
