@@ -21,7 +21,7 @@ namespace Server.Controllers.Api.Users
     public async Task<ActionResult> Get()
     {
       var user = await _userManager.GetUserAsync(HttpContext.User);
-      return Json(user);
+      return Json(user.UserName);
     }
   }
 }
