@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Server.Models.Client;
 using Server.Models;
+using Server.Models.Client;
 using Server.Persistence;
 
 namespace Server
@@ -30,6 +31,10 @@ namespace Server
 
     public void ConfigureServices(IServiceCollection services)
     {
+      if (_environment.EnvironmentName == "Test")
+      {
+        services.AddCors();
+      }
       services.AddAntiforgery(options => options.CookieName = options.HeaderName = "X-XSRF-TOKEN");
       services.AddOptions();
       services.AddScoped<IRepository<Client>, Repository<Client>>();
@@ -77,17 +82,23 @@ namespace Server
       });
 
       services.AddMvcCore()
-          .AddAuthorization()
           .AddViews()
           .AddRazorViewEngine()
           .AddJsonFormatters();
+      if (_environment.EnvironmentName != "Test")
+      {
+        services.AddAuthorization();
+      }
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory)
     {
       factory.AddConsole(Configuration.GetSection("Logging"));
       factory.AddDebug();
-
+      if (env.EnvironmentName == "Test")
+      {
+        app.UseCors(cors => cors.AllowAnyOrigin());
+      }
       app.UseStaticFiles();
       app.UseIdentity();
 

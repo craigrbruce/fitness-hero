@@ -5,27 +5,27 @@ using Server.Persistence;
 
 namespace Server.Controllers.Api.Clients
 {
-    [Authorize] 
+  [Authorize]
   public class ApiController<T> : Controller
-    where T : Model
+  where T : Model
   {
-    private readonly IRepository<T> _repository;
+    protected readonly IRepository<T> Repository;
     public ApiController(IRepository<T> repository)
     {
-      _repository = repository;
+      Repository = repository;
     }
 
     [HttpGet()]
     public IActionResult Get()
     {
-      var models = _repository.GetList();
+      var models = Repository.GetList();
       return Json(models);
     }
 
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-      var result = _repository.Get(id);
+      var result = Repository.Get(id);
       if (result == null)
       {
         return NotFound($"Item with id '{id}' not found");
@@ -36,33 +36,33 @@ namespace Server.Controllers.Api.Clients
     [HttpPost]
     public IActionResult Post([FromBody]T model)
     {
-      var saved = _repository.Save(model);
+      var saved = Repository.Save(model);
       return Created($"{Request.Path.Value}/{saved.Id}", saved);
     }
 
     [HttpPut("{id}")]
     public IActionResult Put(int id, [FromBody]T model)
     {
-      var existing = _repository.Get(id);
+      var existing = Repository.Get(id);
       if (existing == null)
       {
         return NotFound();
       }
-      var updated = _repository.Update(model);
+      var updated = Repository.Update(model);
       return Json(updated);
     }
 
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-      _repository.Delete(new[] { id });
+      Repository.Delete(new[] { id });
       return NoContent();
     }
 
     [HttpDelete]
     public IActionResult BulkDelete(int[] ids)
     {
-      _repository.Delete(ids);
+      Repository.Delete(ids);
       return NoContent();
     }
   }

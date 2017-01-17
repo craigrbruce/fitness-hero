@@ -13,7 +13,7 @@ namespace FH.Test.Integration.Api.User
             _fixture = fixture;
         }
 
-        [Fact]
+        [Fact(Skip = "complete when auth is fleshed out")]
         public void endpoint_should_exist()
         {
             // TODO .. CallApi<object> should be CallApi<User>

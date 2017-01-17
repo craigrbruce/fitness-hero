@@ -1,6 +1,7 @@
 {
-    "version": "1.0.0-*",
+    "version": "1.0.0",
     "dependencies": {
+        "Microsoft.AspNetCore.Cors": "1.1.0",
         "Microsoft.AspNetCore.Antiforgery": "1.1.0",
         "Microsoft.AspNetCore.Authentication.Facebook": "1.1.0",
         "Microsoft.AspNetCore.Authorization": "1.1.0",
