@@ -7,6 +7,7 @@
     "npm": ">=3.8"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-polyfill": "6.13.0",
     "classnames": "2.2.5",
     "fastclick": "1.0.6",
@@ -137,8 +138,8 @@
     "eslint": "eslint client client.test run.js webpack.config.js",
     "stylelint": "stylelint \"client/components/**/*.css\" \"client/views/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
-    "test": "mocha \"client.test\" --compilers js:babel-register",
-    "test:watch": "mocha \"client.test\" --compilers js:babel-register --reporter min --watch",
+    "test": "mocha --recursive \"client.test\" --compilers js:babel-register",
+    "test:watch": "mocha --recursive \"client.test\" --compilers js:babel-register --reporter min --watch",
     "clean": "node run clean",
     "build": "node run build",
     "build:debug": "node run build --debug",
