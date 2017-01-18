@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Routing;
 using Moq;
-using Server.Models;
+using Server.Models.Core;
 using Server.Persistence;
 
 namespace Server.Test.Controllers

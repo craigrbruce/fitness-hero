@@ -1,5 +1,5 @@
 using Xunit;
-using Server.Models;
+using Server.Models.Client;
 using FluentAssertions;
 using Moq;
 using Server.Controllers.Api.Clients;
