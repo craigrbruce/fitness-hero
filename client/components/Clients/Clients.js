@@ -27,25 +27,23 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div style={{ width: '100%', height: '100%' }}>
-        <ResponsiveFixedDataTable
-          rowsCount={this.state.tableData.length}
-          rowHeight={50}
-          width={1000}
-          height={500}
-          headerHeight={50}
-          >
-          <Column
-            width={100}
-            header={<Cell>Name</Cell>}
-            cell={props => (
-              <Cell {...props}>
-                {this.state.tableData[props.rowIndex].name}
-              </Cell>
-            )}
-            />
-        </ResponsiveFixedDataTable>
-      </div>
+      <ResponsiveFixedDataTable
+        rowsCount={this.state.tableData.length}
+        rowHeight={50}
+        width={1000}
+        height={500}
+        headerHeight={50}
+        >
+        <Column
+          width={100}
+          header={<Cell>Name</Cell>}
+          cell={props => (
+            <Cell {...props}>
+              {this.state.tableData[props.rowIndex].name}
+            </Cell>
+          )}
+          />
+      </ResponsiveFixedDataTable>
     );
   }
 }

@@ -33,6 +33,7 @@ const config = {
   entry: [
     /* Material Design Lite (https://getmdl.io) */
     '!!style!css!react-mdl/extra/material.min.css',
+    '!!style!css!fixed-data-table/dist/fixed-data-table.css',
     'react-mdl/extra/material.min.js',
     /* The main entry point of your JavaScript application */
     './main.js',
