@@ -146,8 +146,6 @@ namespace Server.Controllers
             return Content("Account Controller => Login Callback", "text/plain");
         }
 
-        #region Helpers
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -168,6 +166,5 @@ namespace Server.Controllers
             }
         }
 
-         #endregion
     }
 }
