@@ -1,4 +1,7 @@
 import React, { PropTypes } from 'react';
+import ResponsiveFixedDataTable from 'responsive-fixed-data-table';
+import { Column, Cell } from 'fixed-data-table';
+import 'fixed-data-table/dist/fixed-data-table.css';
 
 const title = 'Fitness Hero';
 
@@ -9,16 +12,11 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        { name: 'client a' },
-        { name: 'client b' },
-        { name: 'client c' },
-        { name: 'client d' },
-        { name: 'client e' },
-        { name: 'client f' },
-        { name: 'client g' },
-        { name: 'client h' },
-        { name: 'client i' },
+      tableData: [
+        { name: 'One' },
+        { name: 'Two' },
+        { name: 'Three' },
+        { name: 'Four' },
       ],
     };
   }
@@ -30,7 +28,23 @@ class Home extends React.Component {
   render() {
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        some sort of client grid here
+        <ResponsiveFixedDataTable
+          rowsCount={this.state.tableData.length}
+          rowHeight={50}
+          width={1000}
+          height={500}
+          headerHeight={50}
+          >
+          <Column
+            width={100}
+            header={<Cell>Name</Cell>}
+            cell={props => (
+              <Cell {...props}>
+                {this.state.tableData[props.rowIndex].name}
+              </Cell>
+            )}
+            />
+        </ResponsiveFixedDataTable>
       </div>
     );
   }
