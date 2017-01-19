@@ -1,14 +1,15 @@
-import call from './common';
-
 export const SIGNOUT_SUCCEEDED = 'SIGNOUT_SUCCEEDED';
-export const SIGNOUT_FAILED = 'SIGNOUT_FAILED';
+export const SIGN_IN_SUCCEEDED = 'SIGN_IN_SUCCEEDED';
 
-export function signOut() {
-  return call(
-    'post',
-    SIGNOUT_SUCCEEDED,
-    'account',
-    SIGNOUT_FAILED,
-    'accounts/signout'
-  );
+export function onSignOut() {
+  return {
+    type: SIGNOUT_SUCCEEDED,
+  };
+}
+
+export function onSignIn(userProfile) {
+  return {
+    type: SIGN_IN_SUCCEEDED,
+    userProfile,
+  };
 }

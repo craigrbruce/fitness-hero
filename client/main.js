@@ -5,17 +5,19 @@ import FastClick from 'fastclick';
 import { hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
+import Auth from './lib/auth';
 
 import configureStore from './store/configureStore';
 import Root from './components/Root';
 
 const store = configureStore();
+const auth = new Auth(store);
 const container = document.getElementById('container');
 const history = syncHistoryWithStore(hashHistory, store);
 
 render(
   <AppContainer>
-    <Root store={store} history={history} />
+    <Root store={store} history={history} auth={auth} />
   </AppContainer>,
   container
 );
@@ -29,7 +31,7 @@ if (module.hot) {
     const NewRoot = require('./components/Root').default;
     render(
       <AppContainer>
-        <NewRoot store={store} history={history} />
+        <NewRoot store={store} history={history} auth={auth} />
       </AppContainer>,
       container
     );

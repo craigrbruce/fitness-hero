@@ -6,12 +6,16 @@ import routes from '../routes';
 
 export default class Root extends Component {
   render() {
-    const { store, history } = this.props;
+    const { store, history, auth } = this.props;
     return (
       <Provider store={store}>
         <div>
-          <Router history={history} routes={routes} />
-          { /* <DevTools /> */ }
+          <Router
+            history={history}
+            routes={React.Children.map(routes, (route) => React.cloneElement(route, { auth }))}
+            auth={auth}
+            />
+          { /* <DevTools /> */}
         </div>
       </Provider>
     );
@@ -21,4 +25,5 @@ export default class Root extends Component {
 Root.propTypes = {
   store: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
 };
