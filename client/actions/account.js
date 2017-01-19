@@ -1,5 +1,5 @@
 export const SIGNOUT_SUCCEEDED = 'SIGNOUT_SUCCEEDED';
-export const SIGN_IN_SUCCEEDED = 'SIGN_IN_SUCCEEDED';
+export const SIGNIN_SUCCEEDED = 'SIGNIN_SUCCEEDED';
 
 export function onSignOut() {
   return {
@@ -9,7 +9,7 @@ export function onSignOut() {
 
 export function onSignIn(userProfile) {
   return {
-    type: SIGN_IN_SUCCEEDED,
+    type: SIGNIN_SUCCEEDED,
     userProfile,
   };
 }
