@@ -10,10 +10,6 @@ const config = {
   post_logout_redirect_uri: 'http://localhost:5003/index.html',
 };
 
-if (typeof location.origin === 'undefined') {
-  location.origin = `${location.protocol}//${location.host}`;
-}
-
 class Auth {
   constructor(store) {
     this.store = store;
