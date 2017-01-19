@@ -63,6 +63,7 @@
     "markdown-it": "^7.0.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
+    "oidc-client": "^1.2.2",
     "path-to-regexp": "^1.5.3",
     "pixrem": "^3.0.2",
     "pleeease-filters": "^3.0.0",
