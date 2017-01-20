@@ -9,7 +9,7 @@ const config = {
   redirect_uri: `${baseUrl}/`,
   response_type: 'id_token token',
   scope: 'openid profile api1',
-  post_logout_redirect_uri: `${baseUrl}/index.html`,
+  post_logout_redirect_uri: `${baseUrl}/`,
 };
 
 class Auth {
