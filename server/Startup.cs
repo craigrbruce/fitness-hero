@@ -26,35 +26,13 @@ namespace Server
                 .Build();
         }
 
-        public IConfiguration Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            if (_environment.IsEnvironment("Test"))
-            {
-                services.AddDbContext<DatabaseContext>(
-                    options => options.UseSqlite("Data Source=:memory:"),
-                    ServiceLifetime.Singleton);
-            }
-            else
-            {
-                services.AddDbContext<DatabaseContext>(options =>
-                {
-                    var dbConfig = Configuration.GetSection("Database");
-                    options.UseNpgsql($@"Host={dbConfig["RDS_HOSTNAME"]};
-                        Port={dbConfig["RDS_PORT"]};
-                        Database={dbConfig["RDS_DB_NAME"]};
-                        Username={dbConfig["RDS_USERNAME"]};
-                        Password={dbConfig["RDS_PASSWORD"]}");
-                });
-            }
-
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<DatabaseContext>()
-                .AddDefaultTokenProviders();
+            ConfigureDatabase(services);
 
             services.AddAntiforgery(options => options.CookieName = options.HeaderName = "X-XSRF-TOKEN");
-            services.AddOptions();
             services.AddScoped<IRepository<Client>, Repository<Client>>();
 
             services.AddMvcCore()
@@ -68,12 +46,7 @@ namespace Server
                 services.AddCors();
             }
 
-            services.AddIdentityServer()
-              .AddTemporarySigningCredential()
-              .AddInMemoryIdentityResources(Config.GetIdentityResources())
-              .AddInMemoryApiResources(Config.GetApiResources())
-              .AddInMemoryClients(Config.GetClients())
-              .AddAspNetIdentity<User>();
+            ConfigureIdentity(services);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -95,6 +68,42 @@ namespace Server
             {
                 routes.MapRoute("default", "{*url}", new { controller = "Home", action = "Index" });
             });
+        }
+
+        private void ConfigureDatabase(IServiceCollection services)
+        {
+            if (_environment.IsEnvironment("Test"))
+            {
+                services.AddDbContext<DatabaseContext>(
+                    options => options.UseSqlite("Data Source=:memory:"),
+                    ServiceLifetime.Singleton);
+            }
+            else
+            {
+                services.AddDbContext<DatabaseContext>(options =>
+                {
+                    var dbConfig = Configuration.GetSection("Database");
+                    options.UseNpgsql($@"Host={dbConfig["RDS_HOSTNAME"]};
+                        Port={dbConfig["RDS_PORT"]};
+                        Database={dbConfig["RDS_DB_NAME"]};
+                        Username={dbConfig["RDS_USERNAME"]};
+                        Password={dbConfig["RDS_PASSWORD"]}");
+                });
+            }
+        }
+
+        private void ConfigureIdentity(IServiceCollection services)
+        {
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddIdentityServer()
+              .AddTemporarySigningCredential()
+              .AddInMemoryIdentityResources(Config.GetIdentityResources())
+              .AddInMemoryApiResources(Config.GetApiResources())
+              .AddInMemoryClients(Config.GetClients())
+              .AddAspNetIdentity<User>();
         }
     }
 }

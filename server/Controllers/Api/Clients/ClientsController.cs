@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Server.Models;
 using Server.Models.Client;
 using Server.Persistence;
 
