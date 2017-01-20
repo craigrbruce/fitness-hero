@@ -4,6 +4,7 @@ import {
 
 export const initialState = {
   user: null,
+  token: null,
 };
 
 export default function (state = initialState, action) {
@@ -12,6 +13,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         user: action.user,
+        token: action.token,
       };
     default: return state;
   }

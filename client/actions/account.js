@@ -7,9 +7,10 @@ export function onSignOut() {
   };
 }
 
-export function onSignIn(userProfile) {
+export function onSignIn(userProfile, token) {
   return {
     type: SIGNIN_SUCCEEDED,
     userProfile,
+    token,
   };
 }

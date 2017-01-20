@@ -12,15 +12,20 @@ describe('account reducer', () => {
 
   describe('sign in succeeded', () => {
     it('should update state with user', () => {
-      const expectedState = { user: { name: 'some user' } };
+      const expectedState = {
+        user: { name: 'some user' },
+        token: 'some_token',
+      };
+      const startingState = { user: null, token: null };
 
       const action = {
         type: SIGNIN_SUCCEEDED,
         user: { name: 'some user' },
+        token: 'some_token',
       };
 
       const actualState = reducer(
-        { user: undefined },
+        startingState,
         action
       );
 

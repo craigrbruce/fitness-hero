@@ -11,7 +11,7 @@ class App extends React.Component {
 
   render() {
     return (
-      !!localStorage.getItem('access_token') === false ?
+      !!this.props.token === false ?
         <LandingPage
           signIn={this.props.route.auth.signIn}
           register={this.props.route.auth.register}
@@ -67,10 +67,12 @@ App.propTypes = {
   signOut: React.PropTypes.func,
   children: React.PropTypes.element.isRequired,
   user: React.PropTypes.any,
+  token: React.PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   user: state.account.user,
+  token: state.account.token,
 });
 
 export default connect(mapStateToProps)(App);

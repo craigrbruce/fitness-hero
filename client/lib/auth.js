@@ -24,7 +24,7 @@ class Auth {
   signIn = () => this.mgr.signinRedirect();
 
   signOut = () => {
-    localStorage.removeItem('access_token');
+    // TODO .. dispatch action to clear state token
     this.mgr.signoutRedirect();
   }
 
@@ -34,7 +34,6 @@ class Auth {
         if (!user) {
           return Promise.reject();
         }
-        localStorage.setItem('access_token', user.access_token);
         this.store.dispatch(onSignIn(user.profile));
         return Promise.resolve();
       })
