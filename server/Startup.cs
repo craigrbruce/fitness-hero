@@ -52,6 +52,14 @@ namespace Server
             app.UseIdentity();
             app.UseIdentityServer();
 
+            // TODO: Is this needed? https://github.com/IdentityServer/IdentityServer4.Samples/blob/dev/Quickstarts/7_JavaScriptClient/src/Api/Startup.cs
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:5000",
+                RequireHttpsMetadata = false,
+                ApiName = "api"
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{*url}", new { controller = "Home", action = "Index" });
@@ -101,6 +109,7 @@ namespace Server
             services.AddMvcCore()
                 .AddViews()
                 .AddRazorViewEngine()
+                .AddAuthorization()
                 .AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 

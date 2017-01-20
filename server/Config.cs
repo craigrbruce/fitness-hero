@@ -30,58 +30,24 @@ namespace Server
         // clients want to access resources (aka scopes)
         public static IEnumerable<Client> GetClients()
         {
-            // client credentials client
             return new List<Client>
             {
                 new Client
                 {
-                    ClientId = "client",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientId = "web",
+                    ClientName = "Web Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
 
-                    ClientSecrets = 
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedScopes = { "api" }
-                },
-
-                // resource owner password grant client
-                new Client
-                {
-                    ClientId = "ro.client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-
-                    ClientSecrets = 
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedScopes = { "api" }
-                },
-
-                // OpenID Connect hybrid flow and client credentials client (MVC)
-                new Client
-                {
-                    ClientId = "mvc",
-                    ClientName = "MVC Client",
-                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
-
-                    RequireConsent = true,
-
-                    ClientSecrets = 
-                    {
-                        new Secret("secret".Sha256())
-                    },
-
-                    RedirectUris = { "http://localhost:5002/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:5002" },
+                    RedirectUris = { "http://localhost:5000" },
+                    PostLogoutRedirectUris = { "http://localhost:5000" },
 
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "api"
-                    },
-                    AllowOfflineAccess = true
+                    }
                 }
             };
         }
