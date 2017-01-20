@@ -6,7 +6,7 @@ const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000'
 const config = {
   authority: baseUrl,
   client_id: 'js',
-  redirect_uri: `${baseUrl}/callback.html`,
+  redirect_uri: `${baseUrl}/`,
   response_type: 'id_token token',
   scope: 'openid profile api1',
   post_logout_redirect_uri: `${baseUrl}/index.html`,
