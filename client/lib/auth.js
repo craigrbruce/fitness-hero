@@ -1,13 +1,15 @@
 import Oidc from 'oidc-client';
 import { onSignIn } from '../actions/account';
 
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://dev.fitnesshero.co'; // TODO obviously more sophisticated env config required
+
 const config = {
-  authority: 'http://localhost:5000',
+  authority: baseUrl,
   client_id: 'js',
-  redirect_uri: 'http://localhost:5003/callback.html',
+  redirect_uri: `${baseUrl}/callback.html`,
   response_type: 'id_token token',
   scope: 'openid profile api1',
-  post_logout_redirect_uri: 'http://localhost:5003/index.html',
+  post_logout_redirect_uri: `${baseUrl}/index.html`,
 };
 
 class Auth {
