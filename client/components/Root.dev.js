@@ -12,7 +12,10 @@ export default class Root extends Component {
         <div>
           <Router
             history={history}
-            routes={React.Children.map(routes, (route) => React.cloneElement(route, { auth }))}
+            routes={
+              React.Children
+                .map(routes, (route) => React.cloneElement(route, { auth }))
+            }
             />
           { /* <DevTools /> */}
         </div>
