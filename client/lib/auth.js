@@ -1,3 +1,4 @@
+import { noop } from 'lodash';
 import Oidc from 'oidc-client';
 import { onSignIn } from '../actions/account';
 
@@ -18,6 +19,8 @@ class Auth {
     this.mgr = new Oidc.UserManager(config);
   }
 
+  registser = () => noop; // TODO how the f do we register from here?
+
   signIn = () => this.mgr.signinRedirect();
 
   signOut = () => {
@@ -28,8 +31,12 @@ class Auth {
   getUser = () => (
     this.mgr.getUser()
       .then((user) => {
+        if (!user) {
+          return Promise.reject();
+        }
         localStorage.setItem('access_token', user.access_token);
         this.store.dispatch(onSignIn(user.profile));
+        return Promise.resolve();
       })
   );
 }
