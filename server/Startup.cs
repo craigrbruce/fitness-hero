@@ -31,21 +31,9 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureDatabase(services);
-
-            services.AddAntiforgery(options => options.CookieName = options.HeaderName = "X-XSRF-TOKEN");
-            services.AddScoped<IRepository<Client>, Repository<Client>>();
-
-            services.AddMvcCore()
-                .AddViews()
-                .AddRazorViewEngine()
-                .AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
-
-            if (_environment.EnvironmentName != "Test")
-            {
-                services.AddAuthorization();
-                services.AddCors();
-            }
-
+            ConfigureSecurity(services);
+            ConfigureDI(services);
+            ConfigureMvc(services);
             ConfigureIdentity(services);
         }
 
@@ -90,6 +78,30 @@ namespace Server
                         Password={dbConfig["RDS_PASSWORD"]}");
                 });
             }
+        }
+
+        private void ConfigureSecurity(IServiceCollection services)
+        {
+            services.AddAntiforgery(options => options.CookieName = options.HeaderName = "X-XSRF-TOKEN");
+
+            if (_environment.EnvironmentName != "Test")
+            {
+                services.AddAuthorization();
+                services.AddCors();
+            }
+        }
+
+        private void ConfigureDI(IServiceCollection services)
+        {
+            services.AddScoped<IRepository<Client>, Repository<Client>>();
+        }
+
+        private void ConfigureMvc(IServiceCollection services)
+        {
+            services.AddMvcCore()
+                .AddViews()
+                .AddRazorViewEngine()
+                .AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 
         private void ConfigureIdentity(IServiceCollection services)
