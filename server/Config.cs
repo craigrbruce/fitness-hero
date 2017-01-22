@@ -39,7 +39,7 @@ namespace Server
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { "http://localhost:5000" },
+                    RedirectUris = { "http://localhost:5000/account/callback" },
                     PostLogoutRedirectUris = { "http://localhost:5000" },
 
                     AllowedScopes =
