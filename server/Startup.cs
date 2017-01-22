@@ -47,6 +47,10 @@ namespace Server
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
             app.UseStaticFiles();
             app.UseIdentity();
@@ -54,7 +58,9 @@ namespace Server
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{*url}", new { controller = "Home", action = "Index" });
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
 
