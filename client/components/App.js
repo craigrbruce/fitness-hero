@@ -11,11 +11,8 @@ class App extends React.Component {
 
   render() {
     return (
-      !!this.props.token === false ?
-        <LandingPage
-          signIn={this.props.route.auth.signIn}
-          register={this.props.route.auth.register}
-        /> :
+      !window.userName ?
+        <LandingPage /> :
         <Mdl.Layout fixedDrawer fixedHeader >
           <Mdl.Header title="Fitness Hero" className={s.header} >
             <div style={{ position: 'relative' }}>
@@ -25,14 +22,12 @@ class App extends React.Component {
                 style={{ color: 'white' }}
               >
                 {
-                  `Welcome ${this.props.user.name}`
+                  `Welcome ${window.userName}`
                 }
               </Mdl.Button>
               <Mdl.Menu target="user-menu" align="right">
-                <Mdl.MenuItem
-                  onClick={this.props.route.auth.signOut}
-                >Sign out
-              </Mdl.MenuItem>
+                <Mdl.MenuItem ><a href="account/logout">Sign out</a>
+                </Mdl.MenuItem>
               </Mdl.Menu>
             </div>
           </Mdl.Header>

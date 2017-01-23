@@ -1,4 +1,3 @@
-import { noop } from 'lodash';
 import Oidc from 'oidc-client';
 import { onSignIn } from '../actions/account';
 
@@ -18,8 +17,6 @@ class Auth {
     this.store = store;
     this.mgr = new Oidc.UserManager(config);
   }
-
-  registser = () => noop; // TODO how the f do we register from here?
 
   signIn = () => this.mgr.signinRedirect();
 

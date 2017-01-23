@@ -1,37 +1,16 @@
 @{ ViewData["Title"] = "Home Page"; }
 
-
-@if (User.Identity.IsAuthenticated) {
-  <h1>Welcome back @User.Identity.Name</h1>
-  <h2>User Claims</h2>
-  <dl>
-    @foreach (var claim in User.Claims) {
-    <dt>@claim.Type</dt>
-    <dd>@claim.Value</dd>
-    }
-  </dl>
-
-  var authScheme = "Identity.Application";
-  if (!String.IsNullOrWhiteSpace(authScheme)) {
-    <h2>Cookies Properties</h2>
-    <dl>
-      @{ 
-        var props = (await Context.Authentication.GetAuthenticateInfoAsync(authScheme)).Properties;
-      }
-      @foreach (var item in props.Items)
-      {
-        <dt>@item.Key</dt>
-        <dd>@item.Value</dd>
-      }
-    </dl>
-  }
-}
-
 <div id="container"></div>
+
+
 
 @section Scripts{
   <script src="@ViewData["assets:main:js"]"></script>
-
+  @if (User.Identity.IsAuthenticated) {
+    <script>
+      window.userName =  JSON.parse('@Html.Raw(Json.Serialize(User.Identity.Name))');
+    </script>
+  }
   <script>
     window.ga = function () { { ga.q.push(arguments) } }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
