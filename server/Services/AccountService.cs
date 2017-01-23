@@ -1,4 +1,5 @@
 using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Extensions;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
@@ -140,9 +141,7 @@ namespace Server.Services
             if (user != null)
             {
                 var idp = user.FindFirst(JwtClaimTypes.IdentityProvider)?.Value;
-                // TODO: Use when IdentityServer4.AspNetIdentity depends on IdentityServer4 1.0.2
-                //if (idp != null && idp != IdentityServerConstants.LocalIdentityProvider)
-                if (idp != null && idp != "local")
+                if (idp != null && idp != IdentityServerConstants.LocalIdentityProvider)
                 {
                     if (vm.LogoutId == null)
                     {
