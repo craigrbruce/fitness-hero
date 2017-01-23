@@ -41,7 +41,6 @@ namespace Server.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
             _interaction = interaction;
             _clientStore = clientStore;
-
             _account = new AccountService(interaction, httpContext, clientStore);
         }
 
