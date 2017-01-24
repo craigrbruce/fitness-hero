@@ -1,12 +1,18 @@
 @{ ViewData["Title"] = "Home Page"; }
-
-<div id="container"></div>
-
-
+@if (User.Identity.IsAuthenticated) {
+  <div id="container"></div>
+}else {
+  /* TODO here you could add MDL css reference into @section head */
+  <div>
+    <h1>Put you funky landing page shit here</h1>
+    <a href="account/login">Log in</a>
+    <a href="account/register">Register in</a>
+  </div>
+}
 
 @section Scripts{
-  <script src="@ViewData["assets:main:js"]"></script>
   @if (User.Identity.IsAuthenticated) {
+    <script src="@ViewData["assets:main:js"]"></script>
     <script>
       window.userName =  JSON.parse('@Html.Raw(Json.Serialize(User.Identity.Name))');
     </script>
