@@ -34,6 +34,7 @@ class App extends React.Component {
         </Mdl.Header>
         <Mdl.Drawer
           title="Fitness Hero" className={s.drawer}
+          style={{ borderRightWidth: 0 }}
         >
           <Mdl.Navigation className={s.navigation} >
             <a href="#/">Home</a>
