@@ -1,4 +1,6 @@
 import 'babel-polyfill';
+import 'dialog-polyfill';
+
 import React from 'react';
 import { render } from 'react-dom';
 import FastClick from 'fastclick';

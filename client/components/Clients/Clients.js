@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
+import { noop } from 'lodash';
+import * as Mdl from 'react-mdl';
 import { Column, Cell, Table } from 'fixed-data-table';
 import 'fixed-data-table/dist/fixed-data-table.css';
+import * as s from './Clients.css';
+import Dialog from '../Dialog';
 
 const title = 'Fitness Hero';
 
@@ -11,6 +15,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      openDialog: false,
       tableData: [
         { name: 'One' },
         { name: 'Two' },
@@ -24,28 +29,50 @@ class Home extends React.Component {
     document.title = title;
   }
 
+  handleCloseDialog = () => this.setState({ openDialog: false });
+
+  handleOpenDialog = () => this.setState({ openDialog: true });
+
+  handleSave = () => /** dispatch save action **/ this.handleCloseDialog();
+
   render() {
     return (
-      <Table
-        rowsCount={this.state.tableData.length}
-        rowHeight={50}
-        width={1000}
-        height={500}
-        headerHeight={50}
-        {...this.props}
-        >
-        <Column
-          width={100}
-          header={<Cell>Name</Cell>}
-          fixed
-          width={100}
-          cell={props => (
-            <Cell {...props}>
-              {this.state.tableData[props.rowIndex].name}
-            </Cell>
-          )}
-          />
-      </Table>
+      <div>
+        <div className={s.toolbar}>
+          <Mdl.Button ripple raised onClick={this.handleOpenDialog}>Create</Mdl.Button>
+        </div>
+        {
+          this.state.openDialog ?
+            <Dialog
+              handleSave={this.handleSave}
+              handleCancel={this.handleCloseDialog}
+              title="Add Client"
+              >
+              <span>TODO .. create a client form component</span>
+              
+              </Dialog> : ''
+        }
+        <Table
+          rowsCount={this.state.tableData.length}
+          rowHeight={50}
+          width={1000}
+          height={700}
+          headerHeight={50}
+          {...this.props}
+          >
+          <Column
+            width={100}
+            header={<Cell>Name</Cell>}
+            fixed
+            width={100}
+            cell={props => (
+              <Cell {...props}>
+                {this.state.tableData[props.rowIndex].name}
+              </Cell>
+            )}
+            />
+        </Table>
+      </div>
     );
   }
 }
