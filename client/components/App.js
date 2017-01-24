@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import * as Mdl from 'react-mdl';
 import s from './App.css';
 import LandingPage from './LandingPage';
+import * as api from '../lib/api';
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.route.auth.getUser();
+    // TODO .. obvs just testing here
+    api.get('api/v1/clients')
+      .then((response) => console.log('the response', response))
+      .catch((error) => console.log('the error', error));
   }
 
   render() {
@@ -47,7 +51,6 @@ class App extends React.Component {
                 (child) =>
                   React.cloneElement(
                     child, {
-                      auth: this.props.route.auth,
                     }
                   ))
             }

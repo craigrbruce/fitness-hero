@@ -18,13 +18,6 @@ class Auth {
     this.mgr = new Oidc.UserManager(config);
   }
 
-  signIn = () => this.mgr.signinRedirect();
-
-  signOut = () => {
-    // TODO .. dispatch action to clear state token
-    this.mgr.signoutRedirect();
-  }
-
   getUser = () => (
     this.mgr.getUser()
       .then((user) => {
