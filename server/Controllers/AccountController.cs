@@ -141,9 +141,7 @@ namespace Server.Controllers
     // POST: /Account/ExternalLogin
     [HttpPost]
     [AllowAnonymous]
-    [ValidateAntiForgeryToken]// Copyright © 2014-present Kriasoft, LLC. All rights reserved.
-                              // This source code is licensed under the MIT license found in the
-                              // LICENSE.txt file in the root directory of this source tree.
+    [ValidateAntiForgeryToken]
     public IActionResult ExternalLogin(string provider, string returnUrl = null)
     {
       // Request a redirect to the external login provider.
