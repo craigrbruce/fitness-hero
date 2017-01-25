@@ -1,16 +1,14 @@
-export const SIGNOUT_SUCCEEDED = 'SIGNOUT_SUCCEEDED';
-export const SIGNIN_SUCCEEDED = 'SIGNIN_SUCCEEDED';
+import { call } from './common';
 
-export function onSignOut() {
-  return {
-    type: SIGNOUT_SUCCEEDED,
-  };
+export const GET_ME_SUCCEEDED = 'GET_ME_SUCCEEDED';
+
+export function getMe() {
+  return call(
+    'get',
+    GET_ME_SUCCEEDED,
+    'user',
+    null,
+    'api/v1/me'
+  );
 }
 
-export function onSignIn(userProfile, token) {
-  return {
-    type: SIGNIN_SUCCEEDED,
-    userProfile,
-    token,
-  };
-}

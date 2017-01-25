@@ -1,6 +1,6 @@
 import * as api from '../lib/api';
 
-export default function call(
+export function call(
   apiAction,
   successAction,
   successProperty,

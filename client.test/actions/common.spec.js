@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise from 'sinon-stub-promise';
 import sinon from 'sinon';
-import call from '../../client/actions/common';
+import { call } from '../../client/actions/common';
 import * as api from '../../client/lib/api';
 
 chai.use(sinonChai);

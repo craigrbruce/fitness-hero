@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as Mdl from 'react-mdl';
 import s from './App.css';
-import * as api from '../lib/api';
+import { getMe } from '../actions/account';
 
 class App extends React.Component {
   componentDidMount() {
-    // TODO .. obvs just testing here
-    api.get('api/v1/clients')
-      .then((response) => console.log('the response', response))
-      .catch((error) => console.log('the error', error));
+    this.props.getMe();
   }
 
   render() {
@@ -21,9 +18,9 @@ class App extends React.Component {
               primary
               id="user-menu"
               style={{ color: 'white' }}
-            >
+              >
               {
-                `Welcome ${window.userName}`
+                this.props.user ? `Welcome ${this.props.user.email}` : ''
               }
             </Mdl.Button>
             <Mdl.Menu target="user-menu" align="right">
@@ -35,7 +32,7 @@ class App extends React.Component {
         <Mdl.Drawer
           title="Fitness Hero" className={s.drawer}
           style={{ borderRightWidth: 0 }}
-        >
+          >
           <Mdl.Navigation className={s.navigation} >
             <a href="#/">Home</a>
             <a href="#/clients">Clients</a>
@@ -63,12 +60,15 @@ App.propTypes = {
   signOut: React.PropTypes.func,
   children: React.PropTypes.element.isRequired,
   user: React.PropTypes.any,
-  token: React.PropTypes.string,
+  getMe: React.PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   user: state.account.user,
-  token: state.account.token,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  getMe: () => dispatch(getMe()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import reducer, { initialState } from '../../client/reducers/account';
 import {
-  SIGNIN_SUCCEEDED,
+  GET_ME_SUCCEEDED,
 } from '../../client/actions/account';
 
 describe('account reducer', () => {
@@ -10,25 +10,20 @@ describe('account reducer', () => {
     expect(state).to.deep.equal(initialState);
   });
 
-  describe('sign in succeeded', () => {
+  describe('get me succeeded', () => {
     it('should update state with user', () => {
       const expectedState = {
         user: { name: 'some user' },
-        token: 'some_token',
       };
-      const startingState = { user: null, token: null };
-
+      const startingState = { user: null };
       const action = {
-        type: SIGNIN_SUCCEEDED,
+        type: GET_ME_SUCCEEDED,
         user: { name: 'some user' },
-        token: 'some_token',
       };
-
       const actualState = reducer(
         startingState,
         action
       );
-
       expect(actualState).to.deep.equal(expectedState);
     });
   });
