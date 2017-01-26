@@ -29,16 +29,15 @@
       </div>
       <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl" method="post" class="form-horizontal">
         <div class="mdl-card__supporting-text">
-          <div asp-validation-summary="All" class="text-danger"></div>
           <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" asp-for="Email" />
             <label class="mdl-textfield__label" asp-for="Email">Username</label>
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <span class="mdl-textfield__error" style="visibility: visible" asp-validation-for="Email"></span>
           </div>
           <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="password" asp-for="Password" />
             <label class="mdl-textfield__label" asp-for="Password">Password</label>
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <span class="mdl-textfield__error" style="visibility: visible" asp-validation-for="Password"></span>
           </div>
 
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" asp-for="RememberLogin">
