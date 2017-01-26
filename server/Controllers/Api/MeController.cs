@@ -20,7 +20,11 @@ namespace Server.Controllers.Api
     public async Task<IActionResult> Get()
     {
       var user = await _userManager.GetUserAsync(HttpContext.User);
-      return Json(user);
+      if (user != null)
+      {
+        return Json(new UserViewModel { Email = user.Email });
+      }
+      return Forbid();
     }
   }
 }

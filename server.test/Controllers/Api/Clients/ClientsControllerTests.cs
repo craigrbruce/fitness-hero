@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Test.Controllers.Api.Clients
 {
-  public class ClientsControllerTest : ControllerTestsBase<Client>
+  public class ClientsControllerTests : ControllerTestsBase<Client>
   {
-    public ClientsControllerTest()
+    public ClientsControllerTests()
     {
       Controller = new ClientsController(Repository.Object);
     }
