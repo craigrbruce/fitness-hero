@@ -1,14 +1,4 @@
-/**
- * ASP.NET Core Starter Kit (https://dotnetreact.com)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 /* eslint-disable global-require */
-
 const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
@@ -22,11 +12,7 @@ const babelConfig = Object.assign({}, pkg.babel, {
   cacheDirectory: useHMR,
 });
 
-// Webpack configuration (client/main.js => public/dist/main.{hash}.js)
-// http://webpack.github.io/docs/configuration.html
 const config = {
-
-  // The base directory for resolving the entry option
   context: path.resolve(__dirname, './client'),
 
   // The entry point for the bundle

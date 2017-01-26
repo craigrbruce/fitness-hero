@@ -18,7 +18,7 @@ describe('account actions', () => {
   });
 
   describe('get me', () => {
-    it('should return correct action', () => {
+    it('should invoke `call` with correct parameters', () => {
       getMe();
       expect(callStub.calledWith(
         'get',
