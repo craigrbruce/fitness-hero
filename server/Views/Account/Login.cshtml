@@ -18,6 +18,16 @@
 	  padding: 24px;
 	  flex: none;
     }
+    .signin-button {
+      width: 100%;
+    }
+    .mdl-textfield__error {
+      visibility: visible;
+    }
+    .links {
+      font-size: 12px;
+      text-align: center;
+    }
   </style>
 }
 
@@ -32,12 +42,12 @@
           <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" asp-for="Email" />
             <label class="mdl-textfield__label" asp-for="Email">Username</label>
-            <span class="mdl-textfield__error" style="visibility: visible" asp-validation-for="Email"></span>
+            <span class="mdl-textfield__error" asp-validation-for="Email"></span>
           </div>
           <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="password" asp-for="Password" />
             <label class="mdl-textfield__label" asp-for="Password">Password</label>
-            <span class="mdl-textfield__error" style="visibility: visible" asp-validation-for="Password"></span>
+            <span class="mdl-textfield__error" asp-validation-for="Password"></span>
           </div>
 
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" asp-for="RememberLogin">
@@ -48,12 +58,17 @@
           </label>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Sign in</button>
-
-          <ul class='mdl-list'>
-            <li class="mdl-list__item"><a asp-action="Register" asp-route-returnurl="@Model.ReturnUrl">Create an account</a></li>
-            <li class="mdl-list__item"><a asp-action="ForgotPassword">Forgot your password?</a></li>
-          </ul>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <button class="signin-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Sign in</button>
+            </div>
+            <div class="links mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
+              <a asp-action="ForgotPassword">Forgot your password?</a>
+            </div>
+            <div class="links mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
+              <a asp-action="Register" asp-route-returnurl="@Model.ReturnUrl">Create an account</a>
+            </div>
+          </div>
         </div>
       </form>
     </div>
