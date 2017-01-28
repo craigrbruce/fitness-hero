@@ -1,38 +1,59 @@
 @model RegisterViewModel
 @{
-    ViewData["Title"] = "Register";
+  ViewData["Title"] = "Sign up";
 }
 
-<h2>@ViewData["Title"].</h2>
+@section Styles{
+  <style>
+    .mdl-layout {
+	  align-items: center;
+      justify-content: center;
+    }
+    .mdl-layout__content {
+	  padding: 24px;
+	  flex: none;
+    }
+    .signup-button {
+      width: 100%;
+    }
+    .mdl-textfield__error {
+      visibility: visible;
+    }
+  </style>
+}
 
-<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <h4>Create a new account.</h4>
-    <hr />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+<div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+  <main class="mdl-layout__content">
+    <div class="mdl-card mdl-shadow--6dp">
+      <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+        <h2 class="mdl-card__title-text">Sign up for an account</h2>
+      </div>
+      <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+        <div class="mdl-card__supporting-text">
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" asp-for="Email" />
+            <label class="mdl-textfield__label" asp-for="Email">Email</label>
+            <span class="mdl-textfield__error" asp-validation-for="Email"></span>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="password" asp-for="Password" />
+            <label class="mdl-textfield__label" asp-for="Password">Password</label>
+            <span class="mdl-textfield__error" asp-validation-for="Password"></span>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="password" asp-for="ConfirmPassword" />
+            <label class="mdl-textfield__label" asp-for="ConfirmPassword">Confirm Password</label>
+            <span class="mdl-textfield__error" asp-validation-for="ConfirmPassword"></span>
+          </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+        <div class="mdl-card__actions mdl-card--border">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <button class="signup-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Sign up</button>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Register</button>
-        </div>
-    </div>
-</form>
+  </main>
+</div>
