@@ -20,7 +20,7 @@ class App extends React.Component {
               style={{ color: 'white' }}
               >
               {
-                this.props.user ? `Welcome ${this.props.user.email}` : ''
+                this.props.user ? `${this.props.user.email}` : ''
               }
             </Mdl.Button>
             <Mdl.Menu target="user-menu" align="right">
