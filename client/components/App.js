@@ -34,9 +34,25 @@ class App extends React.Component {
           style={{ borderRightWidth: 0 }}
           >
           <Mdl.Navigation className={s.navigation} >
-            <a href="#/">Home</a>
-            <a href="#/clients">Clients</a>
-            <a href="#/appointments">Appointments</a>
+            <Mdl.List>
+              <Mdl.ListItem>
+                <Mdl.ListItemContent icon="dashboard"><a href="/">Dashboard</a></Mdl.ListItemContent>
+              </Mdl.ListItem>
+              <Mdl.ListItem>
+                <Mdl.ListItemContent icon="person"><a href="clients">Clients</a></Mdl.ListItemContent>
+              </Mdl.ListItem>
+              <Mdl.ListItem>
+                <Mdl.ListItemContent href="schedule" icon="date_range">Schedule</Mdl.ListItemContent>
+              </Mdl.ListItem>
+            </Mdl.List>
+            <Mdl.List>
+              <Mdl.ListItem>
+                <Mdl.ListItemContent icon="settings">Settings</Mdl.ListItemContent>
+              </Mdl.ListItem>
+              <Mdl.ListItem>
+                <Mdl.ListItemContent icon="person">Account</Mdl.ListItemContent>
+              </Mdl.ListItem>
+            </Mdl.List>
           </Mdl.Navigation>
         </Mdl.Drawer >
         <Mdl.Content >
