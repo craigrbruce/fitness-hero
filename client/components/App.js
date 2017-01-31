@@ -36,10 +36,10 @@ class App extends React.Component {
           <Mdl.Navigation className={s.navigation} >
             <Mdl.List>
               <Mdl.ListItem>
-                <Mdl.ListItemContent icon="dashboard"><a href="/">Dashboard</a></Mdl.ListItemContent>
+                <Mdl.ListItemContent icon="dashboard"><a href="#/">Dashboard</a></Mdl.ListItemContent>
               </Mdl.ListItem>
               <Mdl.ListItem>
-                <Mdl.ListItemContent icon="group"><a href="clients">Clients</a></Mdl.ListItemContent>
+                <Mdl.ListItemContent icon="group"><a href="#/clients">Clients</a></Mdl.ListItemContent>
               </Mdl.ListItem>
               <Mdl.ListItem>
                 <Mdl.ListItemContent href="schedule" icon="date_range">Schedule</Mdl.ListItemContent>
