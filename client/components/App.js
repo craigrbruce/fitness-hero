@@ -30,7 +30,7 @@ class App extends React.Component {
           </div>
         </Mdl.Header>
         <Mdl.Drawer
-          title="Fitness Hero" className={s.drawer}
+          className={s.drawer}
           style={{ borderRightWidth: 0 }}
           >
           <Mdl.Navigation className={s.navigation} >
