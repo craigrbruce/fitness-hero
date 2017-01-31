@@ -14,15 +14,12 @@ class App extends React.Component {
       <Mdl.Layout fixedDrawer fixedHeader >
         <Mdl.Header title="Fitness Hero" className={s.header} >
           <div style={{ position: 'relative' }}>
-            <Mdl.Button
+            <Mdl.IconButton
               primary
               id="user-menu"
               style={{ color: 'white' }}
-              >
-              {
-                this.props.user ? `${this.props.user.email}` : ''
-              }
-            </Mdl.Button>
+              name="person"
+              />
             <Mdl.Menu target="user-menu" align="right">
               <Mdl.MenuItem ><a href="account/logout">Sign out</a>
               </Mdl.MenuItem>
