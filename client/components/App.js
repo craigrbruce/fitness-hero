@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import * as Mui from 'material-ui';
 import { getMe } from 'actions/account';
 
+const DRAWER_WIDTH = 320;
+
 export class App extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
@@ -19,6 +21,7 @@ export class App extends React.Component {
     super(props);
     this.state = {
       open: false,
+      docked: false,
     };
   }
 
@@ -28,8 +31,25 @@ export class App extends React.Component {
     };
   }
 
+  componentWillMount() {
+    const mql = window.matchMedia('(min-width: 800px)');
+    mql.addListener(this.mediaQueryChanged);
+    this.setState({ mql });
+  }
+
   componentDidMount() {
     this.props.getMe();
+    this.mediaQueryChanged();
+  }
+
+  componentWillUnmount() {
+    this.state.mql.removeListener(this.mediaQueryChanged);
+  }
+
+  mediaQueryChanged = () => {
+    const docked = this.state.mql.matches;
+    const open = this.state.mql.matches;
+    this.setState({ docked, open });
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
@@ -54,15 +74,7 @@ export class App extends React.Component {
               <Mui.IconMenu
                 targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                style={{ color: 'white' }}
-                iconButtonElement={
-                  <Mui.IconButton
-                    style={{ color: 'white' }}
-                    labelPosition="before"
-                    >
-                    <PersonOutline />
-                  </Mui.IconButton>
-                }
+                iconButtonElement={<Mui.IconButton labelPosition="before"><PersonOutline /></Mui.IconButton>}
                 >
                 <Mui.MenuItem
                   primaryText="Sign out"
@@ -74,10 +86,13 @@ export class App extends React.Component {
           />
         <Mui.Drawer
           open={this.state.open}
-          docked={false}
-          width={320}
+          docked={this.state.docked}
+          width={DRAWER_WIDTH}
           onRequestChange={this.handleDrawerRequestChange}
           >
+          {
+            this.state.docked ? <h5 style={{ marginLeft: 15 }}>Fitness Hero</h5> : <span />
+          }
           <Mui.Menu>
             <Mui.MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} />
             <Mui.MenuItem primaryText="Clients" leftIcon={<People />} />
@@ -87,7 +102,7 @@ export class App extends React.Component {
             <Mui.MenuItem primaryText="Acccount" leftIcon={<Person />} />
           </Mui.Menu>
         </Mui.Drawer >
-        <div className="main-content">
+        <div className="main-content" style={{ marginLeft: this.state.docked ? DRAWER_WIDTH : 0 }}>
           {
             React.Children.map(
               this.props.children,
