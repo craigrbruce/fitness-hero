@@ -60,13 +60,17 @@ export class App extends React.Component {
 
   handleMenuTouchTap = (route) => {
     history.push(route);
-    setTimeout(() => this.setState({ open: false }), 1000);
+    if (this.state.docked === false) {
+      setTimeout(() => this.setState({ open: false }), 1000);
+    }
   };
 
   render() {
     return (
       <div className="application" >
         <Mui.AppBar
+          showMenuIconButton={this.state.docked === false}
+          style={{ marginLeft: this.state.docked ? DRAWER_WIDTH : 0 }}
           onLeftIconButtonTouchTap={this.handleToggle}
           title="Fitness Hero"
           iconElementRight={
@@ -90,12 +94,9 @@ export class App extends React.Component {
           width={DRAWER_WIDTH}
           onRequestChange={this.handleDrawerRequestChange}
           >
-          {
-            this.state.docked ? <h5 style={{ marginLeft: 15 }}>Fitness Hero</h5> : <span />
-          }
           <Mui.Menu>
-            <Mui.MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} />
-            <Mui.MenuItem primaryText="Clients" leftIcon={<People />} />
+            <Mui.MenuItem href="#/" primaryText="Dashboard" leftIcon={<Dashboard />} />
+            <Mui.MenuItem href="#/clients" primaryText="Clients" leftIcon={<People />} />
             <Mui.MenuItem primaryText="Schedule" leftIcon={<Event />} />
             <Mui.Divider />
             <Mui.MenuItem primaryText="Settings" leftIcon={<Settings />} />
