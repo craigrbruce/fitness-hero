@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const Dashboard = () => (
-  <div>Welcome to Fitness Hero</div>
+  <div>Put Dashboard Here</div>
 );
 
 export default Dashboard;
