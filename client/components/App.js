@@ -3,7 +3,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { connect } from 'react-redux';
 import * as Mui from 'material-ui';
-import { getMe } from '../actions/account';
+import { getMe } from 'actions/account';
 
 class App extends React.Component {
   static childContextTypes = {

@@ -14,14 +14,19 @@ const babelConfig = Object.assign({}, pkg.babel, {
 
 const config = {
   context: path.resolve(__dirname, './client'),
+  resolve: {
+    modules: [
+      path.resolve('./client'),
+      path.resolve('./node_modules'),
+    ],
+    alias: {
+      sinon: path.resolve(__dirname, '/node_modules/sinon/pkg/sinon.js'),
+      app: './components/app',
+    },
+  },
 
   // The entry point for the bundle
   entry: [
-    /* Material Design Lite (https://getmdl.io) */
-    '!!style!css!react-mdl/extra/material.min.css',
-    '!!style!css!fixed-data-table/dist/fixed-data-table.css',
-    'react-mdl/extra/material.min.js',
-    /* The main entry point of your JavaScript application */
     './main.js',
   ],
 
@@ -72,7 +77,15 @@ const config = {
 
   // Options affecting the normal modules
   module: {
+    noParse: [
+      /node_modules\/sinon/, /node_modules\/json-schema\/lib\/validate\/.js/,
+      /sinon\.js/,
+    ],
     loaders: [
+      {
+        test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
+        loader: 'imports-loader?define=>false,require=>false',
+      },
       {
         test: /\.jsx?$/,
         include: [

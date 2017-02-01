@@ -1,6 +1,6 @@
 import {
   GET_ME_SUCCEEDED,
-} from '../actions/account';
+} from 'actions/account';
 
 export const initialState = {
   user: null,

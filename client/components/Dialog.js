@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Mdl from 'react-mdl';
+import * as Mui from 'material-ui';
 
 const Dialog = ({
   title,
@@ -7,18 +7,18 @@ const Dialog = ({
   handleCancel,
   children,
 }) => (
-  <Mdl.Dialog open>
-    <Mdl.DialogTitle>{title}</Mdl.DialogTitle>
-    <Mdl.DialogContent>
+  <Mui.Dialog open>
+    <Mui.DialogTitle>{title}</Mui.DialogTitle>
+    <Mui.DialogContent>
       {
         children
       }
-    </Mdl.DialogContent>
-    <Mdl.DialogActions>
-      <Mdl.Button onClick={handleSave}>Save</Mdl.Button>
-      <Mdl.Button onClick={handleCancel}>Cancel</Mdl.Button>
-    </Mdl.DialogActions>
-  </Mdl.Dialog>
+    </Mui.DialogContent>
+    <Mui.DialogActions>
+      <Mui.Button onClick={handleSave}>Save</Mui.Button>
+      <Mui.Button onClick={handleCancel}>Cancel</Mui.Button>
+    </Mui.DialogActions>
+  </Mui.Dialog>
 );
 
 Dialog.propTypes = {

@@ -1,10 +1,8 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import {
   getMe,
   GET_ME_SUCCEEDED,
-} from '../../client/actions/account';
-import * as common from '../../client/actions/common';
+} from 'actions/account';
+import * as common from 'actions/common';
 
 describe('account actions', () => {
   let callStub;

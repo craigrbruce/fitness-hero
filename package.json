@@ -14,8 +14,10 @@
         "fastclick": "1.0.6",
         "fixed-data-table": "^0.6.3",
         "history": "3.0.0",
+        "jsdom": "^9.9.1",
         "lodash": "^4.17.4",
         "material-ui": "^0.16.7",
+        "mocha-webpack": "^0.7.0",
         "moment": "^2.17.1",
         "numeral": "^2.0.4",
         "react": "15.3.1",
@@ -121,6 +123,7 @@
         ]
     },
     "eslintConfig": {
+        "globals": { "sinon": true, "expect": true },
         "env": {
             "browser": true
         },
@@ -129,7 +132,8 @@
         "rules": {
             "react/jsx-filename-extension": 0,
             "react/jsx-closing-bracket-location": 0,
-            "import/no-extraneous-dependencies": 0
+            "import/no-extraneous-dependencies": 0,
+            "import/no-unresolved": 0
         }
     },
     "stylelint": {
@@ -143,8 +147,8 @@
         "eslint": "eslint client client.test run.js webpack.config.js",
         "stylelint": "stylelint \"client/components/**/*.css\" \"client/views/**/*.css\"",
         "lint": "npm run eslint && npm run stylelint",
-        "test": "mocha --recursive \"client.test\" --compilers js:babel-register",
-        "test:watch": "mocha --recursive \"client.test\" --compilers js:babel-register --reporter min --watch",
+        "test:watch": "node_modules/mocha-webpack/bin/mocha-webpack --require \"client.test/init.js\" --webpack-config webpack.config.js --watch \"client.test/**/*.spec.*\"",
+        "test": "node_modules/mocha-webpack/bin/mocha-webpack --require \"client.test/init.js\" --webpack-config webpack.config.js \"client.test/**/*.spec.*\"",
         "clean": "node run clean",
         "build": "node run build",
         "build:debug": "node run build --debug",

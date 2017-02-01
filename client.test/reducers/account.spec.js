@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import reducer, { initialState } from '../../client/reducers/account';
+import reducer, { initialState } from 'reducers/account';
 import {
   GET_ME_SUCCEEDED,
-} from '../../client/actions/account';
+} from 'actions/account';
 
 describe('account reducer', () => {
   it('should return the default state for an unknown action', () => {

@@ -1,11 +1,9 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import request from 'axios';
 import {
   bulkDeleteResource,
   save,
   get,
-} from '../../client/lib/api';
+} from 'lib/api';
 
 describe('get', () => {
   let getStub;

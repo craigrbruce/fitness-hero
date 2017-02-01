@@ -8,8 +8,8 @@
  */
 
 import React from 'react';
-import history from '../../history';
-import Link from '../../components/Link';
+import history from 'history';
+import Link from 'components/Link';
 import s from './ErrorPage.css';
 
 class ErrorPage extends React.Component {

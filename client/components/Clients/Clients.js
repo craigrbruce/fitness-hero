@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react';
-import { noop } from 'lodash';
-import * as Mdl from 'react-mdl';
 import { Column, Cell, Table } from 'fixed-data-table';
 import 'fixed-data-table/dist/fixed-data-table.css';
+import Dialog from 'components/Dialog';
 import * as s from './Clients.css';
-import Dialog from '../Dialog';
 
 const title = 'Fitness Hero';
 
@@ -39,7 +37,7 @@ class Home extends React.Component {
     return (
       <div>
         <div className={s.toolbar}>
-          <Mdl.Button ripple raised onClick={this.handleOpenDialog}>Create</Mdl.Button>
+          <span>add new</span>
         </div>
         {
           this.state.openDialog ?
@@ -49,8 +47,8 @@ class Home extends React.Component {
               title="Add Client"
               >
               <span>TODO .. create a client form component</span>
-              
-              </Dialog> : ''
+
+            </Dialog> : ''
         }
         <Table
           rowsCount={this.state.tableData.length}

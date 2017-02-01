@@ -1,5 +1,5 @@
 import Oidc from 'oidc-client';
-import { onSignIn } from '../actions/account';
+import { onSignIn } from 'actions/account';
 
 const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://dev.fitnesshero.co'; // TODO obviously more sophisticated env config required
 
