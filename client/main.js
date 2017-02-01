@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import 'dialog-polyfill';
-
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import React from 'react';
 import { render } from 'react-dom';
 import FastClick from 'fastclick';
@@ -17,6 +17,7 @@ const auth = new Auth(store);
 const container = document.getElementById('container');
 const history = syncHistoryWithStore(hashHistory, store);
 
+injectTapEventPlugin();
 render(
   <AppContainer>
     <Root store={store} history={history} auth={auth} />

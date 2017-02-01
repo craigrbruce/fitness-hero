@@ -1,58 +1,79 @@
 import React from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { connect } from 'react-redux';
-import * as Mdl from 'react-mdl';
-import s from './App.css';
+import * as Mui from 'material-ui';
 import { getMe } from '../actions/account';
 
 class App extends React.Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: getMuiTheme(),
+    };
+  }
+
   componentDidMount() {
     this.props.getMe();
   }
 
+  handleToggle = () => this.setState({ open: !this.state.open });
+
+  closeDrawer = () => this.setState({ open: false });
+
+  handleDrawerRequestChange = (open: boolean) => this.setState({ open });
+
+  handleMenuTouchTap = (route: string) => {
+    history.push(route);
+    setTimeout(() => this.setState({ open: false }), 1000);
+  };
+
   render() {
     return (
-      <Mdl.Layout fixedDrawer fixedHeader >
-        <Mdl.Header title="Fitness Hero" className={s.header} >
-          <div style={{ position: 'relative' }}>
-            <Mdl.IconButton
-              primary
-              id="user-menu"
-              style={{ color: 'white' }}
-              name="person"
-              />
-            <Mdl.Menu target="user-menu" align="right">
-              <Mdl.MenuItem ><a href="account/logout">Sign out</a>
-              </Mdl.MenuItem>
-            </Mdl.Menu>
-          </div>
-        </Mdl.Header>
-        <Mdl.Drawer
-          className={s.drawer}
-          style={{ borderRightWidth: 0 }}
+      <div className="application" >
+        <Mui.AppBar
+          onLeftIconButtonTouchTap={this.handleToggle}
+          title="Fitness Hero"
+          iconElementRight={
+            <div className="app-bar-actions">
+              <Mui.IconMenu
+                targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                style={{ margin: 5, color: 'white' }}
+                iconButtonElement={
+                  <Mui.IconButton
+                    style={{ color: 'white' }}
+                    icon={<ArrowDropDown />}
+                    labelPosition="before"
+                    />
+                }
+                >
+                <Mui.MenuItem
+                  primaryText="Sign out"
+                  href="account/logout"
+                  />
+              </Mui.IconMenu>
+            </div>
+          }
+          />
+        <Mui.Drawer
+          open={this.state.open}
+          docked={false}
+          width={320}
+          onRequestChange={this.handleDrawerRequestChange}
           >
-          <Mdl.Navigation className={s.navigation} >
-            <Mdl.List>
-              <Mdl.ListItem>
-                <Mdl.ListItemContent icon="dashboard"><a href="#/">Dashboard</a></Mdl.ListItemContent>
-              </Mdl.ListItem>
-              <Mdl.ListItem>
-                <Mdl.ListItemContent icon="group"><a href="#/clients">Clients</a></Mdl.ListItemContent>
-              </Mdl.ListItem>
-              <Mdl.ListItem>
-                <Mdl.ListItemContent href="schedule" icon="date_range">Schedule</Mdl.ListItemContent>
-              </Mdl.ListItem>
-            </Mdl.List>
-            <Mdl.List>
-              <Mdl.ListItem>
-                <Mdl.ListItemContent icon="settings">Settings</Mdl.ListItemContent>
-              </Mdl.ListItem>
-              <Mdl.ListItem>
-                <Mdl.ListItemContent icon="person">Account</Mdl.ListItemContent>
-              </Mdl.ListItem>
-            </Mdl.List>
-          </Mdl.Navigation>
-        </Mdl.Drawer >
-        <Mdl.Content >
+        </Mui.Drawer >
+        <div className="main-content">
           {
             React.Children.map(
               this.props.children,
@@ -62,8 +83,8 @@ class App extends React.Component {
                   }
                 ))
           }
-        </Mdl.Content>
-      </Mdl.Layout >
+        </div>
+      </div >
     );
   }
 }
