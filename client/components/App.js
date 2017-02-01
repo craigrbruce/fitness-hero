@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as Mui from 'material-ui';
 import { getMe } from 'actions/account';
 
-class App extends React.Component {
+export class App extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   };

@@ -106,7 +106,8 @@
         ],
         "plugins": [
             "transform-class-properties",
-            "transform-object-rest-spread", [
+            "transform-object-rest-spread",
+            [
                 "transform-regenerator",
                 {
                     "async": false
@@ -123,7 +124,10 @@
         ]
     },
     "eslintConfig": {
-        "globals": { "sinon": true, "expect": true },
+        "globals": {
+            "sinon": true,
+            "expect": true
+        },
         "env": {
             "browser": true
         },

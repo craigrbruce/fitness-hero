@@ -58,7 +58,13 @@ const config = {
     cached: isVerbose,
     cachedAssets: isVerbose,
   },
-
+  externals: {
+    net: true,
+    cheerio: 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  },
   // The list of plugins for Webpack compiler
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
