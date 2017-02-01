@@ -1,11 +1,11 @@
 import React from 'react';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import Dashboard from 'material-ui/svg-icons/action/dashboard';
 import Event from 'material-ui/svg-icons/action/event';
 import Settings from 'material-ui/svg-icons/action/settings';
 import People from 'material-ui/svg-icons/social/people';
 import Person from 'material-ui/svg-icons/social/person';
+import PersonOutline from 'material-ui/svg-icons/social/person-outline';
 import { connect } from 'react-redux';
 import * as Mui from 'material-ui';
 import { getMe } from 'actions/account';
@@ -54,13 +54,14 @@ export class App extends React.Component {
               <Mui.IconMenu
                 targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                style={{ margin: 5, color: 'white' }}
+                style={{ color: 'white' }}
                 iconButtonElement={
                   <Mui.IconButton
                     style={{ color: 'white' }}
-                    icon={<ArrowDropDown />}
                     labelPosition="before"
-                    />
+                    >
+                    <PersonOutline />
+                  </Mui.IconButton>
                 }
                 >
                 <Mui.MenuItem
